@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import style from "../../Styles/Login.module.css"
+import style from "../../Styles/Login.modules.css"
 
  
 
@@ -19,6 +19,21 @@ function Login() {
             setError('Veuillez remplir tous les champs.');
             return;
         }
+
+        if (password === ConfirmeMotDePasse){
+            let data = {nom, prenom,age,sexe,email,password,ConfirmeMotDePasse,Domaine,Preference}
+            axios.post("http://localhost:5000/user/Login", data)
+            .then((data)=>{
+                console.log(data.data);
+            })
+            .catch((error)=>{
+                console.log(error);
+            })
+        }else{
+            setError('Mot de passe incorrect.');
+            return;
+        }
+
         // Soumission des données (peut être envoyé à votre backend pour l'authentification)
         console.log('Email:', email);
         console.log('userName:', userName);

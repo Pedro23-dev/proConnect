@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import style from "../../Styles/Connexion.module.css"
+import style from "../../Styles/Connexion.modules.css"
+import axios from "axios"
 
 
-function Connexion() {
+
+function Inscription() {
     // Définition des états pour les champs du formulaire
     const [nom, setNom] = useState('');
     const [prenom, setPrenom] = useState('');
@@ -10,25 +12,51 @@ function Connexion() {
     const [sexe, setSexe] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [ConfirmeMotDePasse, setConfirmeMotDePasse] = useState('');
+    const [Domaine, setDomaine] = useState('');
+    const [Preference, setPreference] = useState('');
     const [error, setError] = useState('');
+
+
     
     
     // Gestion de la soumission du formulaire
     const handleSubmit = (e) => {
         e.preventDefault();
         // Validation des champs du formulaire
-        if ( !nom || !prenom || !age || !sexe || !email || !password ) {
+        if ( !nom || !prenom || !age || !sexe || !email || !password || !ConfirmeMotDePasse || !Domaine || !Preference) {
             setError('Veuillez remplir tous les champs.');
             return;
         }
+/*         axios
+ */        if (password === ConfirmeMotDePasse){
+            let data = {nom, prenom,age,sexe,email,password,ConfirmeMotDePasse,Domaine,Preference}
+            axios.post("http://localhost:5000/user/signup", data)
+            .then((data)=>{
+                console.log(data.data);
+            })
+            .catch((error)=>{
+                console.log(error);
+            })
+        }else{
+            setError('Mot de passe incorrect.');
+            return;
+        }
+
+
         // Soumission des données (peut être envoyé à votre backend pour l'authentification)
         console.log('nom:', nom);
         console.log('Prenom:', prenom);
         console.log('Age:', age);
         console.log('Sexe:', sexe);
-        
         console.log('Email:', email);
         console.log('Password:', password);
+        console.log('ConfirmeMotDePasse:', ConfirmeMotDePasse);
+        console.log('Domaine:', Domaine);
+        console.log('Preference:', Preference);
+
+
+
         // Réinitialisation des champs du formulaire
         setNom('');
         setPrenom('');
@@ -36,7 +64,11 @@ function Connexion() {
         setSexe('');
         setEmail('');
         setPassword('');
+        setConfirmeMotDePasse('');
+        setDomaine('');
+        setPreference('');
         setError('');
+
     };
  
     return (
@@ -88,7 +120,7 @@ function Connexion() {
                 </div>
 
                 <div className={style.Form_group}>
-                    <label htmlFor="sexe"></label>
+                    <label htmlFor="sexe">sexe:</label>
                    <select name="sexe" id="sexe " onChange={(e) => setEmail(e.target.value)}
                         required>
                     <option value="">Choisir</option>
@@ -124,6 +156,18 @@ function Connexion() {
                         required
                     />
                 </div>
+
+                <div className={style.Form_group}>
+                    <label htmlFor=" ConfirmeMotDePasse"></label>
+                    <input
+                        type="password"
+                        id="ConfirmeMotDePasse"
+                        value={ConfirmeMotDePasse}
+                        placeholder='Confimé le Mot de passe '
+                        onChange={(e) => setConfirmeMotDePasse(e.target.value)}
+                        required
+                    />
+                </div>
                 
                 <button type="submit">Connexion</button>
             </form>
@@ -133,4 +177,4 @@ function Connexion() {
     );
 }
 
-export default Connexion;
+export default Inscription;

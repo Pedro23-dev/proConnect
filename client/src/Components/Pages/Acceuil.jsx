@@ -1,5 +1,5 @@
 import React from 'react';
-import style from "../../Styles/Acceuil.module.css"
+import style from "../../Styles/Acceuil.modules.css"
 
 const Acceuil = () => {
     return (

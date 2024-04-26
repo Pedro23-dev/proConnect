@@ -3,6 +3,7 @@ import Connexions from './Components/Pages/Connexions';
 import Login from './Components/Pages/Login';
 import React from 'react';
 import Accueil from "./Components/Pages/Acceuil";
+import Discussion from "./Components/Pages/Discussion";
 
 function App() {
   return (
@@ -11,6 +12,8 @@ function App() {
     <Route path="/login" element={<Login/>}/>
     <Route path="/signup" element={<Connexions/>}/>
     <Route path="/acceuil" element={<Accueil/>}/>
+    <Route path="/discussion" element={<Discussion/>}/>
+
 
    </Routes>
   </BrowserRouter>
