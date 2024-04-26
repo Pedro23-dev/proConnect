@@ -6,7 +6,7 @@ bcrypt
 .hash(req.body.password, 10)
 .then((hash) => {
   let InsertUserQuery =
-    "INSERT INTO users (firstname_user,lastname,email_user, pwd_user,age_user,photo_user,sexe_user) VALUES(?,?,?,?) ";
+    "INSERT INTO users (firstname_user,lastname,email_user, pwd_user,age_user,photo_user,sexe_user,confirm_pwd,preference_user,domaine_user) VALUES(?,?,?,?) ";
   dataBase.query(
     InsertUserQuery,
     [req.body.name, req.body.surname, req.body.email, hash],
